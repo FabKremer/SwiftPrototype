@@ -10,33 +10,28 @@ import Foundation
 
 class BackendProxy {
   
-  class func getArticles() -> [String: AnyObject] {
+  class func getArticles(completion: (articles: [Article]?, error: NSError?) -> Void) {
     let manager = AFHTTPRequestOperationManager()
-    var responseDict = [String: AnyObject]()
+    var responseArticles = [Article]()
     manager.GET(
-      "http://local.blinker.com:3000/api/v3/listings/1",
+      "http://localhost:3000/countries",
       parameters: nil,
       success: { (operation: AFHTTPRequestOperation!,
         responseObject: AnyObject!) in
-        println(responseObject)
-//        let responseJson = JSON(data: responseObject.description)
-//        responseDict["jsonResponse"] = jsonObject
-//        responseDict["error"] = nil
+        // parse Articles from response JSON
+        let responseDict = responseObject as [String: AnyObject]
+        for article in responseDict["countries"] as [AnyObject] {
+          let jsonArticle = article as [String: AnyObject]
+          responseArticles.append(Article(ident: jsonArticle["id"] as Int, name: jsonArticle["name"] as String, description: jsonArticle["name"] as String))
+        }
+        completion(articles: responseArticles, error: nil)
       },
       failure: { (operation: AFHTTPRequestOperation!,
         error: NSError!) in
-        println(error)
-//        responseDict["error"] = error.description
-//        responseDict["jsonResponse"] = nil
+        completion(articles: nil, error: error)
     })
     
-    return [String:AnyObject]()
+    
   }
 
 }
-//        let jsonData = responseObject.description.dataUsingEncoding(NSUTF8StringEncoding)
-
-//var parseError: NSError?
-//let jsonObject: AnyObject? = NSJSONSerialization.JSONObjectWithData(jsonData!,
-//  options: NSJSONReadingOptions.AllowFragments,
-//  error:&parseError)

@@ -10,7 +10,7 @@ import Foundation
 
 class LoadingView : UIView {
   
-  class func addLoadingView(#viewToShowIn: UIView) -> UIActivityIndicatorView {
+  class func addLoadingView(inView viewToShowIn: UIView) -> UIActivityIndicatorView {
     var activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
     activityIndicator.color = UIColor.grayColor()
     activityIndicator.center = viewToShowIn.center
@@ -21,7 +21,7 @@ class LoadingView : UIView {
     return activityIndicator
   }
   
-  class func removeLoadingView(activityIndicator: UIActivityIndicatorView) {
+  class func removeLoadingView(andActivityIndicator activityIndicator: UIActivityIndicatorView) {
     activityIndicator.removeFromSuperview()
   }
   
