@@ -10,13 +10,13 @@ import Foundation
 
 class Article {
   let ident: Int
-  let name: String
-  let description: String
+  let title: String
+  let text: String
   
-  init(ident: Int, name: String, description: String){
+  init(ident: Int, title: String, text: String){
     self.ident = ident
-    self.name = name
-    self.description = description
+    self.title = title
+    self.text = text
   }
   
 //  class func parseArticle(fromJson json: Dictionary) -> Article {

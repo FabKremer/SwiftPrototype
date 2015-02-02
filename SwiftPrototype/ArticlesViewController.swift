@@ -49,7 +49,7 @@ class ArticlesViewController: UITableViewController {
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier("atricleCell", forIndexPath: indexPath) as UITableViewCell
     
-    cell.textLabel?.text = self.articles[indexPath.row].name
+    cell.textLabel?.text = self.articles[indexPath.row].title
     cell.backgroundColor = UIColor.clearColor()
     return cell
     

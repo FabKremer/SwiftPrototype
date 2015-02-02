@@ -14,15 +14,14 @@ class BackendProxy {
     let manager = AFHTTPRequestOperationManager()
     var responseArticles = [Article]()
     manager.GET(
-      "http://localhost:3000/countries",
+      "http://localhost:3000/articles",
       parameters: nil,
       success: { (operation: AFHTTPRequestOperation!,
         responseObject: AnyObject!) in
         // parse Articles from response JSON
-        let responseDict = responseObject as [String: AnyObject]
-        for article in responseDict["countries"] as [AnyObject] {
+        for article in (responseObject as [AnyObject]) {
           let jsonArticle = article as [String: AnyObject]
-          responseArticles.append(Article(ident: jsonArticle["id"] as Int, name: jsonArticle["name"] as String, description: jsonArticle["name"] as String))
+          responseArticles.append(Article(ident: jsonArticle["id"] as Int, title: jsonArticle["title"] as String, text: jsonArticle["text"] as String))
         }
         completion(articles: responseArticles, error: nil)
       },
